@@ -22,6 +22,23 @@ class TodoListViewController: UITableViewController {
         }
           
     }
+
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .normal, title: "delete") { (UIContextualAction,UIView, sucess:(Bool) -> Void) in
+            sucess(true)
+        }
+        delete.backgroundColor = .red
+        return UISwipeActionsConfiguration(actions: [delete])
+    }
+    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let add = UIContextualAction(style: .normal, title: "add") { (UIContextualAction, UIView, sucess:(Bool) -> Void) in
+            sucess(true)
+        }
+        add.backgroundColor = .lightGray
+        return UISwipeActionsConfiguration(actions: [add])
+    }
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,8 +60,6 @@ class TodoListViewController: UITableViewController {
         }else{
             tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
         }
-        
-        
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
